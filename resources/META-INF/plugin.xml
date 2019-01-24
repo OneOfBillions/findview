@@ -1,0 +1,45 @@
+<idea-plugin version="2">
+  <id>com.cttrip.viewgenerate</id>
+  <name>Android ButterKnife viewbindgenerate</name>
+  <version>1.0.0</version>
+  <vendor email="android@avast.com" url="http://github.com/avast">Avast</vendor>
+
+  <description><![CDATA[
+      Plugin for generating ButterKnife injections from selected layout XMLs in activities/fragments/adapters.
+      ]]></description>
+
+  <change-notes><![CDATA[
+<html>
+  <ul>
+    <li>Initial release</li>
+  </ul>
+</html>
+      ]]></change-notes>
+
+  <idea-version since-build="123.72"/>
+
+  <!-- please see http://confluence.jetbrains.net/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
+                 on how to target different products -->
+  <depends>com.intellij.modules.lang</depends>
+
+  <actions>
+    <action id="CttripInjectionsAction"
+            class="com.cttrip.android.butterknifezelezny.InjectAction"
+            text="Generate generateViewzById"
+            icon="/icons/butterknife-zelezny.png"
+            description="Plugin for generating ButterKnife injections from selected layout XMLs in activities/fragments/adapters">
+
+      <keyboard-shortcut
+              keymap="$default"
+              first-keystroke="shift control B"/>
+      <add-to-group group-id="GenerateGroup"/>
+      <!-- <add-to-group group-id="ProjectViewPopupMenu" /> file pop-up -->
+    </action>
+  </actions>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <applicationConfigurable instance="com.cttrip.android.butterknifezelezny.Settings" />
+    <codeInsight.lineMarkerProvider language="JAVA"
+                                    implementationClass="com.cttrip.android.butterknifezelezny.navigation.NavigationMarkerProvider" />
+  </extensions>
+</idea-plugin>
