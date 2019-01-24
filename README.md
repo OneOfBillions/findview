@@ -1,114 +1,80 @@
-Butter Knife
+Butter Knife FindView Plugin
 ============
 
-![Logo](website/static/logo.png)
-
-Field and method binding for Android views which uses annotation processing to generate boilerplate
+Field and method binding for Android views which uses plugin to generate boilerplate
 code for you.
 
- * Eliminate `findViewById` calls by using `@BindView` on fields.
+ * Eliminate `findViewById` calls by using `@CBind` on fields.
  * Group multiple views in a list or array. Operate on all of them at once with actions,
    setters, or properties.
- * Eliminate anonymous inner-classes for listeners by annotating methods with `@OnClick` and others.
+ * Eliminate anonymous inner-classes for listeners by annotating methods with `@COnClick` and others.
  * Eliminate resource lookups by using resource annotations on fields.
 
 ```java
-class ExampleActivity extends Activity {
-  @BindView(R.id.user) EditText username;
-  @BindView(R.id.pass) EditText password;
+public class DemoActivity
+        extends Activity {
 
-  @BindString(R.string.login_error) String loginErrorMessage;
+    @CBind("com.tts.hybird.train.R.id.tv_TitleBarText")
+    TextView tvTitleBarText;
+    @CBind("com.tts.hybird.train.R.id.tv_TitleBarTextSmall")
+    TextView tvTitleBarTextSmall;
+    @CBind("com.tts.hybird.train.R.id.iv_TitleBarBack")
+    ImageView ivTitleBarBack;
+    @CBind("com.tts.hybird.train.R.id.iv_TitleBarRightBtn")
+    ImageView ivTitleBarRightBtn;
+    @CBind("com.tts.hybird.train.R.id.tv_TitleBarRightText")
+    TextView tvTitleBarRightText;
+    @CBind("com.tts.hybird.train.R.id.layout_TitleBarRight")
+    LinearLayout layoutTitleBarRight;
+    @CBind("com.tts.hybird.train.R.id.root_title_rl")
+    RelativeLayout rootTitleRl;
+    @CBind("com.tts.hybird.train.R.id.m_train_tv_pre_sale_day_count")
+    TextView mTrainTvPreSaleDayCount;
+    @CBind("com.tts.hybird.train.R.id.m_train_layout_notice")
+    LinearLayout mTrainLayoutNotice;
+    @CBind("com.tts.hybird.train.R.id.m_train_vs_cal_one")
+    ViewStub mTrainVsCalOne;
+    @CBind("com.tts.hybird.train.R.id.m_train_vs_cal_two")
+    ViewStub mTrainVsCalTwo;
+    @CBind("com.tts.hybird.train.R.id.m_train_vs_cal_three")
+    ViewStub mTrainVsCalThree;
 
-  @OnClick(R.id.submit) void submit() {
-    // TODO call server...
-  }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.m_train_activity_select_date)
+        CButterKnife.bind(this);
 
-  @Override public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.simple_activity);
-    ButterKnife.bind(this);
-    // TODO Use fields...
-  }
-}
+    }
+
+ 
+
+    @COnClick({"com.tts.hybird.train.R.id.tv_TitleBarText", "com.tts.hybird.train.R.id.tv_TitleBarTextSmall", "com.tts.hybird.train.R.id.iv_TitleBarBack", "com.tts.hybird.train.R.id.iv_TitleBarRightBtn", "com.tts.hybird.train.R.id.tv_TitleBarRightText"})
+    public void onViewClicked(View view, final String idName) {
+        switch (idName) {
+            case "com.tts.hybird.train.R.id.tv_TitleBarText":
+                break;
+            case "com.tts.hybird.train.R.id.tv_TitleBarTextSmall":
+                break;
+            case "com.tts.hybird.train.R.id.iv_TitleBarBack":
+                break;
+            case "com.tts.hybird.train.R.id.iv_TitleBarRightBtn":
+                break;
+            case "com.tts.hybird.train.R.id.tv_TitleBarRightText":
+                break;
+        }
+    }
+
 ```
 
-For documentation and additional information see [the website][3].
-
-__Remember: A butter knife is like [a dagger][1] only infinitely less sharp.__
-
-
-
-Download
+Download 
 --------
 
-```groovy
-dependencies {
-  implementation 'com.jakewharton:butterknife:10.0.0'
-  annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
-}
-```
-
-If you are using Kotlin, replace `annotationProcessor` with `kapt`.
-
-Snapshots of the development version are available in [Sonatype's `snapshots` repository][snap].
+browse Repositories by 'Android ButterKnife viewbindgenerate'
 
 
-
-Library projects
---------------------
-
-To use Butter Knife in a library, add the plugin to your `buildscript`:
-
-```groovy
-buildscript {
-  repositories {
-    mavenCentral()
-   }
-  dependencies {
-    classpath 'com.jakewharton:butterknife-gradle-plugin:10.0.0'
-  }
-}
-```
-
-and then apply it in your module:
-
-```groovy
-apply plugin: 'com.android.library'
-apply plugin: 'com.jakewharton.butterknife'
-```
-
-Now make sure you use `R2` instead of `R` inside all Butter Knife annotations.
-
-```java
-class ExampleActivity extends Activity {
-  @BindView(R2.id.user) EditText username;
-  @BindView(R2.id.pass) EditText password;
-...
-}
-```
-
-
-
-License
+Thank
 -------
+Thank @TomasKypta with his android-butterknife-zelezny
+  
 
-    Copyright 2013 Jake Wharton
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
-
-
-
- [1]: http://square.github.com/dagger/
- [2]: https://search.maven.org/remote_content?g=com.jakewharton&a=butterknife&v=LATEST
- [3]: http://jakewharton.github.com/butterknife/
- [snap]: https://oss.sonatype.org/content/repositories/snapshots/
